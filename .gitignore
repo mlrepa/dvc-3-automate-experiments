@@ -1,0 +1,14 @@
+# folders
+
+## IDEs
+.idea
+
+## Python
+venv*
+__pycache__
+.ipynb_checkpoints
+
+
+# files
+
+.DS_Store
