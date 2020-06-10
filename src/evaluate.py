@@ -5,7 +5,8 @@ from sklearn.metrics import confusion_matrix, f1_score
 import joblib
 
 
-def evaluate(raw_dataset_path, test_dataset_path, model_path,  eval_report_path):
+def evaluate(raw_dataset_path, test_dataset_path, model_path,
+             metrics_path, confusion_matrix_path):
 
     classes = pd.read_csv(raw_dataset_path)['target'].unique().tolist()
 
@@ -20,14 +21,24 @@ def evaluate(raw_dataset_path, test_dataset_path, model_path,  eval_report_path)
     f1 = f1_score(y_true=y, y_pred=prediction, average='macro')
 
     json.dump(
-        obj={
-            'f1_score': f1,
-            'confusion_matrix': {
-                'classes': classes,
-                'matrix': cm.tolist()
-            }
-        },
-        fp=open(eval_report_path, 'w')
+        obj={'f1_score': f1},
+        fp=open(metrics_path, 'w')
+    )
+
+    CM = []
+
+    for row in cm.tolist():
+
+        row_dict = {}
+
+        for i in range(len(classes)):
+            row_dict[classes[i]] = row[i]
+
+        CM.append(row_dict)
+
+    json.dump(
+        obj={'confusion_matrix': CM},
+        fp=open(confusion_matrix_path, 'w')
     )
 
 
@@ -37,13 +48,15 @@ if __name__ == '__main__':
     args_parser.add_argument('--raw-dataset', dest='raw_dataset', required=True)
     args_parser.add_argument('--test-dataset', dest='test_dataset', required=True)
     args_parser.add_argument('--model', dest='model', required=True)
-    args_parser.add_argument('--eval-report', dest='eval_report', required=True)
+    args_parser.add_argument('--metrics', dest='metrics', required=True)
+    args_parser.add_argument('--confusion-matrix', dest='confusion_matrix', required=True)
     args = args_parser.parse_args()
 
     evaluate(
         args.raw_dataset,
         args.test_dataset,
         args.model,
-        args.eval_report
+        args.metrics,
+        args.confusion_matrix
     )
 
