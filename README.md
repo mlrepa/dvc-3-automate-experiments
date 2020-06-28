@@ -1,10 +1,10 @@
-# dvc-lesson-4
+# Tutorial: dvc-3-automate-experiments
 
 ## 1. clone this repository
 
 ```bash
 git clone https://gitlab.com/7labs.ru/tutorials-dvc/dvc-3-automate-experiments.git
-cd dvc-lesson-4
+cd dvc-3-automate-experiments
 ```
 
 ## 2. Create and activate virtual environment
@@ -34,7 +34,7 @@ pip install -r requirements.txt
 python -m ipykernel install --user --name=venv-dvc-3-automate-experiments
 ``` 
 
-## 5. Run and follow Jupyter Notebook `Lesson 4.ipynb` for instructions:
+## 5. Run and follow Jupyter Notebook `dvc-3-automate-experiments.ipynb` for instructions:
 
 ```bash
 jupyter notebook
