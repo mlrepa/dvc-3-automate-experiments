@@ -1,5 +1,7 @@
 import argparse
 import pandas as pd
+from typing import Text
+import yaml
 
 
 def get_features(dataset):
@@ -9,9 +11,17 @@ def get_features(dataset):
     return features
 
 
-def featurize(raw_dataset_path, featurized_dataset_path):
+def featurize(config_path: Text) -> None:
+    """Create features
+    Args:
+        config_path {Text}: path to config
+    """
 
-    dataset = pd.read_csv(raw_dataset_path)
+    config = yaml.safe_load(open(config_path))
+    raw_data_path = config['data_load']['raw_data_path']
+    featurized_dataset_path = config['featurize']['features_path']
+
+    dataset = pd.read_csv(raw_data_path)
     features = get_features(dataset)
     features.to_csv(featurized_dataset_path, index=False)
 
@@ -19,8 +29,7 @@ def featurize(raw_dataset_path, featurized_dataset_path):
 if __name__ == '__main__':
 
     args_parser = argparse.ArgumentParser()
-    args_parser.add_argument('--raw-dataset', dest='raw_dataset', required=True)
-    args_parser.add_argument('--featurized-dataset', dest='featurized_dataset', required=True)
+    args_parser.add_argument('--config', dest='config', required=True)
     args = args_parser.parse_args()
 
-    featurize(args.raw_dataset, args.featurized_dataset)
+    featurize(config_path=args.config)
