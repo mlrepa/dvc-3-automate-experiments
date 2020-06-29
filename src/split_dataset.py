@@ -1,18 +1,23 @@
 import argparse
-import pandas as pd
-
 from sklearn.model_selection import train_test_split
+import pandas as pd
+from typing import Text
+import yaml
 
 
-def split_train_test(featurized_dataset_path, train_dataset_path,
-                     test_dataset_path, test_size):
+def split_train_test(config_path: Text) -> None:
+    """Split dataset into train and test
+    Args:
+       config_path {Text}: path to config
+    """
+
+    config = yaml.safe_load(open(config_path))
+    featurized_dataset_path = config['featurize']['features_path']
+    train_dataset_path = config['data_split']['train_path']
+    test_dataset_path = config['data_split']['test_path']
+    test_size = config['data_split']['test_size']
 
     dataset = pd.read_csv(featurized_dataset_path)
-
-    # transform targets (species) to numerics
-    # dataset.loc[dataset.species=='setosa', 'species'] = 0
-    # dataset.loc[dataset.species=='versicolor', 'species'] = 1
-    # dataset.loc[dataset.species=='virginica', 'species'] = 2
 
     # Split in train/test
 
@@ -23,18 +28,9 @@ def split_train_test(featurized_dataset_path, train_dataset_path,
 
 
 if __name__ == '__main__':
-    
-    arg_parser = argparse.ArgumentParser()
-    arg_parser.add_argument('--featurized-dataset', dest='featurized_dataset', required=True)
-    arg_parser.add_argument('--train-dataset', dest='train_dataset', required=True)
-    arg_parser.add_argument('--test-dataset', dest='test_dataset', required=True)
-    arg_parser.add_argument('--test-size', dest='test_size', type=float)
 
-    args = arg_parser.parse_args()
+    args_parser = argparse.ArgumentParser()
+    args_parser.add_argument('--config', dest='config', required=True)
+    args = args_parser.parse_args()
 
-    split_train_test(
-        args.featurized_dataset,
-        args.train_dataset,
-        args.test_dataset,
-        args.test_size
-    )
+    split_train_test(config_path=args.config)
