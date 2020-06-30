@@ -2,7 +2,6 @@
 data_load:
   raw_data_path: data/iris.csv
   classes_names_path: data/classes.json
-  dummy_param: dummy_value
 
 featurize:
   features_path: data/iris_featurized.csv
@@ -21,4 +20,4 @@ train:
 
 evaluate:
   metrics_file: data/metrics.json
-  confusion_matrix: data/cm.json
+  confusion_matrix: data/cm.csv
