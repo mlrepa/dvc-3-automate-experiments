@@ -2,7 +2,7 @@ import argparse
 import joblib
 import json
 import pandas as pd
-from sklearn.metrics import confusion_matrix, f1_score
+from sklearn.metrics import f1_score
 from typing import Text
 import yaml
 
@@ -29,7 +29,6 @@ def evaluate(config_path: Text) -> None:
     clf = joblib.load(model_path)
 
     prediction = clf.predict(X)
-    cm = confusion_matrix(prediction, y)
     f1 = f1_score(y_true=y, y_pred=prediction, average='macro')
 
     json.dump(
@@ -37,21 +36,17 @@ def evaluate(config_path: Text) -> None:
         fp=open(metrics_path, 'w')
     )
 
-    CM = []
+    # pd.DataFrame({'actual': y, 'predicted': prediction}).apply(
+    #     lambda series: series.map(
+    #         {i: cls_name for i, cls_name in enumerate(classes)}
+    #     )
+    # ).to_csv(confusion_matrix_path, index=False)
 
-    for row in cm.tolist():
-
-        row_dict = {}
-
-        for i in range(len(classes)):
-            row_dict[classes[i]] = row[i]
-
-        CM.append(row_dict)
-
-    json.dump(
-        obj={'confusion_matrix': CM},
-        fp=open(confusion_matrix_path, 'w')
-    )
+    mapping = {i: cls_name for i, cls_name in enumerate(classes)}
+    cmdf = pd.DataFrame(
+        {'actual': y, 'predicted': prediction}
+    ).apply(lambda series: series.map(mapping))
+    cmdf.to_csv(confusion_matrix_path, index=False)
 
 
 if __name__ == '__main__':
