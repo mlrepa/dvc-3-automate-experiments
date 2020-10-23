@@ -1,0 +1,23 @@
+
+data_load:
+  raw_data_path: data/iris.csv
+  classes_names_path: data/classes.json
+
+featurize:
+  features_path: data/iris_featurized.csv
+  target_column: target
+
+
+data_split:
+  test_size: 0.2
+  train_path: data/train.csv
+  test_path: data/test.csv
+
+
+train:
+  model_path: data/model.joblib
+
+
+evaluate:
+  metrics_file: data/metrics.json
+  confusion_matrix: data/cm.csv
