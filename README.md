@@ -1,10 +1,10 @@
-# Lesson 3 tutorial: Automate DVC experiments
-**ML REPA School course**: Machine Learning experiments reproducibility and engineering with DVC
+# Tutorial: Automate DVC experiments (lesson 3)
+## Machine Learning experiments reproducibility and engineering with DVC //  ML REPA School 
 
 ## 1. Clone this repository
 
 ```bash
-git clone https://gitlab.com/7labs.ru/tutorials-dvc/dvc-3-automate-experiments.git
+git https://github.com/mlrepa/dvc-3-automate-experiments.git
 cd dvc-3-automate-experiments
 ```
 

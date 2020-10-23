@@ -36,12 +36,6 @@ def evaluate(config_path: Text) -> None:
         fp=open(metrics_path, 'w')
     )
 
-    # pd.DataFrame({'actual': y, 'predicted': prediction}).apply(
-    #     lambda series: series.map(
-    #         {i: cls_name for i, cls_name in enumerate(classes)}
-    #     )
-    # ).to_csv(confusion_matrix_path, index=False)
-
     mapping = {i: cls_name for i, cls_name in enumerate(classes)}
     cmdf = pd.DataFrame(
         {'actual': y, 'predicted': prediction}
