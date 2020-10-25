@@ -13,6 +13,7 @@ cd dvc-3-automate-experiments
 Create virtual environment named `dvc` (you may use other name)
 ```bash
 python3 -m venv dvc-venv
+echo "export PYTHONPATH=$PWD" >> dvc-venv/bin/activate
 source dvc-venv/bin/activate
 ```
 
