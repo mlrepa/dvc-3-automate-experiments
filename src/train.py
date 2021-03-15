@@ -4,7 +4,8 @@ import pandas as pd
 from sklearn.linear_model import LogisticRegression
 from sklearn.svm import SVC
 from typing import Text
-import yaml
+
+from src.utils import load_config
 
 
 def train(config_path: Text) -> None:
@@ -13,11 +14,9 @@ def train(config_path: Text) -> None:
        config_path {Text}: path to config
     """
 
-    config = yaml.safe_load(open(config_path))
-    train_dataset_path = config['data_split']['train_path']
-    model_path = config['train']['model_path']
+    config = load_config(config_path)
     # Load train set
-    train_dataset = pd.read_csv(train_dataset_path)
+    train_dataset = pd.read_csv(config.data_split.train_path)
 
     # Get X and Y
     y = train_dataset.loc[:, 'target'].values.astype('float32')
@@ -27,7 +26,7 @@ def train(config_path: Text) -> None:
     clf = LogisticRegression(C=0.00001, solver='lbfgs', multi_class='multinomial', max_iter=100)
     clf.fit(X, y)
 
-    joblib.dump(clf, model_path)
+    joblib.dump(clf, config.train.model_path)
 
 
 if __name__ == '__main__':

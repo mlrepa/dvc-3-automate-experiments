@@ -1,7 +1,8 @@
 import argparse
 import pandas as pd
 from typing import Text
-import yaml
+
+from src.utils import load_config
 
 
 def get_features(dataset):
@@ -17,13 +18,11 @@ def featurize(config_path: Text) -> None:
         config_path {Text}: path to config
     """
 
-    config = yaml.safe_load(open(config_path))
-    raw_data_path = config['data_load']['raw_data_path']
-    featurized_dataset_path = config['featurize']['features_path']
+    config = load_config(config_path)
 
-    dataset = pd.read_csv(raw_data_path)
+    dataset = pd.read_csv(config.data_load.raw_data_path)
     features = get_features(dataset)
-    features.to_csv(featurized_dataset_path, index=False)
+    features.to_csv(config.featurize.features_path, index=False)
 
 
 if __name__ == '__main__':
