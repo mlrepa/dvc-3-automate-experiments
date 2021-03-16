@@ -32,7 +32,7 @@ python -m ipykernel install --user --name=dvc-venv
 ## 5. Configure ToC for jupyter notebook (optional)
 
 ```bash
-sudo jupyter contrib nbextension install
+jupyter contrib nbextension install --user
 jupyter nbextension enable toc2/main
 ```
 
