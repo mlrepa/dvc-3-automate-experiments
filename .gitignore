@@ -1,17 +1,15 @@
-# folders
+# Environments
+.venv
 
-## IDEs
+# IDEs
 .idea
+.vscode
 
-## Python
-dvc-venv
-__pycache__
-.ipynb_checkpoints
-
-## Project
-data
-
-# files
-
-## Mac OS
+# Mac OS
 .DS_Store
+
+# Python
+__pycache__
+
+# Project
+data

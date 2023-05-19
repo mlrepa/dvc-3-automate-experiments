@@ -1,43 +1,17 @@
-# Tutorial: Automate DVC experiments (lesson 3)
-## Machine Learning experiments reproducibility and engineering with DVC //  ML REPA School 
+# Tutorial: Automate DVC experiments
 
-## 1. Clone this repository
+## 1. Create and activate virtual environment
+
+Create virtual environment
 
 ```bash
-git https://github.com/mlrepa/dvc-3-automate-experiments.git
-cd dvc-3-automate-experiments
+python3 -m venv .venv
+echo "export PYTHONPATH=$PWD" >> .venv/bin/activate
+source .venv/bin/activate
 ```
 
-## 2. Create and activate virtual environment
-
-Create virtual environment named `dvc` (you may use other name)
-```bash
-python3 -m venv dvc-venv
-echo "export PYTHONPATH=$PWD" >> dvc-venv/bin/activate
-source dvc-venv/bin/activate
-```
-
-## 3. Install python libraries
+## 2. Install python libraries
 
 ```bash
 pip install -r requirements.txt
-```
-
-## 4. Add Virtual Environment to Jupyter Notebook
-
-```bash
-python -m ipykernel install --user --name=dvc-venv
-``` 
-
-## 5. Configure ToC for jupyter notebook (optional)
-
-```bash
-jupyter contrib nbextension install --user
-jupyter nbextension enable toc2/main
-```
-
-## 6. Run and follow Jupyter Notebook `dvc-3-automate-experiments.ipynb` for instructions:
-
-```bash
-jupyter notebook
 ```

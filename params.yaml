@@ -1,7 +1,7 @@
-
 data_load:
   raw_data_path: data/iris.csv
   classes_names_path: data/classes.json
+
 
 featurize:
   features_path: data/iris_featurized.csv
