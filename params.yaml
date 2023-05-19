@@ -15,9 +15,9 @@ data_split:
 
 
 train:
-  model_path: data/model.joblib
+  model_path: models/model.joblib
 
 
 evaluate:
-  metrics_file: data/metrics.json
-  confusion_matrix: data/cm.csv
+  metrics_file: reports/metrics.json
+  confusion_matrix: reports/cm.csv

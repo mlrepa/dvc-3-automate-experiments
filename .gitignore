@@ -12,4 +12,6 @@
 __pycache__
 
 # Project
-data
+data/*
+models/*
+reports/*
